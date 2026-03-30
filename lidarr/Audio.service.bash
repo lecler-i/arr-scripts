@@ -1723,7 +1723,7 @@ LidarrTaskStatusCheck () {
 	alerted=no
 	until false
 	do
-		taskCount=$(curl -s "$arrUrl/api/v1/command?apikey=${arrApiKey}" | jq '[.[] | select(.status=="started") | select(.body.isLongRunning != true)] | length')
+		taskCount=$(curl -s "$arrUrl/api/v1/command?apikey=${arrApiKey}" | jq '[.[] | select(.status=="started") | select(.commandName != "Process Monitored Downloads")] | length')
 		if [ "$taskCount" -ge "1" ]; then
 			if [ "$alerted" == "no" ]; then
 				alerted=yes
